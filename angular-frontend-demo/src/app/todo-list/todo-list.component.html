@@ -1,1 +1,4 @@
-<p>todo-list works!</p>
+<h1>todo-list</h1>
+<ul *ngFor="let todo of todos">
+    <li>{{todo.id}}, {{todo.text}}, {{todo.date}}, {{todo.is_finished}}</li>
+</ul>
