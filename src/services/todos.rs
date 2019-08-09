@@ -1,12 +1,12 @@
 use actix_web::{web, HttpRequest, HttpResponse};
 
-use crate::models::todo::{TodoList, NewTodo};
+use crate::models::todo::{Todo, NewTodo ,TodoList};
 
-pub fn all_todos(_req: HttpRequest) -> HttpResponse {
+pub fn get_all(_req: HttpRequest) -> HttpResponse {
     HttpResponse::Ok().json(TodoList::get_all())
 }
 
-pub fn create_todo(new_todo: web::Json<NewTodo>) -> Result<HttpResponse, HttpResponse> {
+pub fn create(new_todo: web::Json<NewTodo>) -> Result<HttpResponse, HttpResponse> {
     new_todo
         .create()
         .map(|todo| HttpResponse::Ok().json(todo))
@@ -14,3 +14,20 @@ pub fn create_todo(new_todo: web::Json<NewTodo>) -> Result<HttpResponse, HttpRes
             HttpResponse::InternalServerError().json(e.to_string())
         })
 }
+
+pub fn get_by_id(id: web::Path<i32>) -> Result<HttpResponse, HttpResponse> {
+    Todo::get_by_id(&id)
+        .map(|todo| HttpResponse::Ok().json(todo))
+        .map_err(|e| {
+            HttpResponse::InternalServerError().json(e.to_string())
+        })
+}
+
+pub fn delete_by_id(id: web::Path<i32>) -> Result<HttpResponse, HttpResponse> {
+    Todo::delete_by_id(&id)
+        .map(|_| HttpResponse::Ok().json(()))
+        .map_err(|e| {
+            HttpResponse::InternalServerError().json(e.to_string())
+        })
+}
+

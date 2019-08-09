@@ -20,13 +20,20 @@ mod db_handler;
 fn main() {
     let sys = actix::System::new("todo-api");
 
-    HttpServer::new(|| App::new().service(
-        web::resource("/todos")
-            .route(web::get().to_async(services::todos::all_todos))
-            .route(web::get().to_async(services::todos::create_todo))
-        ))
-            .bind("127.0.0.1:8080").unwrap()
-            .start();
+    HttpServer::new(|| App::new()
+            .service(
+                web::resource("/todos")
+                    .route(web::get().to_async(services::todos::get_all))
+                    .route(web::get().to_async(services::todos::create))
+            )
+            .service(
+                web::resource("/todos/{id}")
+                    .route(web::get().to_async(services::todos::get_by_id))
+                    .route(web::delete().to_async(services::todos::delete_by_id))
+            )
+        )
+        .bind("127.0.0.1:8080").unwrap()
+        .start();
     
     let _ = sys.run();
 }
