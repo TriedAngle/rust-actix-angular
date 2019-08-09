@@ -24,7 +24,7 @@ fn main() {
             .service(
                 web::resource("/todos")
                     .route(web::get().to_async(services::todos::get_all))
-                    .route(web::get().to_async(services::todos::create))
+                    .route(web::post().to_async(services::todos::create))
             )
             .service(
                 web::resource("/todos/{id}")
