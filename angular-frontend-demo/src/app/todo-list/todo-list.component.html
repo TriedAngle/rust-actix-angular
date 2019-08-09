@@ -11,12 +11,29 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let todo of todos">
+            <tr *ngFor="let todo of todos" (click)="todo_clicked(todo)">
                 <th scope="row">{{todo.id}}</th>
                 <th>{{todo.todo_text}}</th>
                 <th>{{todo.time_added}}</th>
+                <th>{{todo.time_finished}}</th>
                 <th>{{todo.finished}}</th>
             </tr>
         </tbody>
     </table>
+    <hr>
+    <h2>Selected Todo</h2>
+    <ul>
+        <li>
+            <input type="text" [(ngModel)]="curr_text">TEXT
+        </li>
+        <li>
+            <input type="text" [(ngModel)]="curr_added">ADDED
+        </li>
+        <li>
+            <input type="checkbox" [(ngModel)]="curr_finished">FINISHED
+        </li>
+        <li>
+            <input type="text" [(ngModel)]="curr_time_finished">TIME_FINISHED
+        </li>
+    </ul>
 </div>

@@ -9,17 +9,44 @@ import { TodoServiceService } from '../services/todo-service.service';
 export class TodoListComponent implements OnInit {
 
   public todos = [];
-  private todo_service: TodoServiceService;
+  public curr_text: string;
+  public curr_added: string;
+  public curr_finished: string;
+  public curr_time_finished: string;
   
-  constructor(todo_service: TodoServiceService) {
+  constructor(private todo_service: TodoServiceService) {
     this.todo_service = todo_service;
    }
 
   ngOnInit() {
-    this.todo_service.getTodos().subscribe(data => {
-      this.todos = data
-      console.log(data)
-    })
+    this.getTodos()
+  }
+
+  getTodos = () => {
+    this.todo_service.getTodos().subscribe(
+      data => {
+      this.todos = data;
+      },
+      error => {
+        console.log(error);
+      })
+  }
+
+  todo_clicked = (todo) => {
+    this.todo_service.getTodoById(todo.id).subscribe(
+      data => {
+        console.log(todo)
+        this.curr_text = todo.todo_text;
+        this.curr_added = todo.time_added;
+        this.curr_finished = todo.is_finished;
+        if(todo.time_finished === ""){
+          this.curr_time_finished = "Not finished yet!"
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
 }
