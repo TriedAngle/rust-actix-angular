@@ -9,6 +9,34 @@ pub struct Todo {
     pub finished: bool,
 }
 
+impl Todo {
+    pub fn get_by_id(id: &i32) -> Result<Todo, diesel::result::Error> {
+        use diesel::QueryDsl;
+        use diesel::RunQueryDsl;
+        use crate::db_handler::connect;
+
+        let connection = connect();
+
+        todos::table
+            .find(id)
+            .first(&connection)
+    }
+
+    pub fn delete_by_id(id: &i32) -> Result<(), diesel::result::Error> {
+        use diesel::QueryDsl;
+        use diesel::RunQueryDsl;
+        use crate::schema::todos::dsl;
+        use crate::db_handler::connect;
+
+        let connection = connect();
+
+        diesel::delete(
+            dsl::todos.find(id))
+                .execute(&connection)?;
+        Ok(())
+    }
+}
+
 #[derive(Insertable, Deserialize)]
 #[table_name = "todos"]
 pub struct NewTodo {
