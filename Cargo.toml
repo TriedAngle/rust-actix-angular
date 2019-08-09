@@ -9,6 +9,7 @@ edition = "2018"
 [dependencies]
 actix = "*"
 actix-web = "*"
+actix-cors = "*"
 diesel = {version="*", features=["postgres"]}
 dotenv = "*"
 chrono = "*"

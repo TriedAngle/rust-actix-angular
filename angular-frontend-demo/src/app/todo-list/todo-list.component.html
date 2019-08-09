@@ -1,4 +1,22 @@
-<h1>todo-list</h1>
-<ul *ngFor="let todo of todos">
-    <li>{{todo.id}}, {{todo.text}}, {{todo.date}}, {{todo.is_finished}}</li>
-</ul>
+<h1 class="header">todo-list</h1>
+<div class="container-fluid">
+    <table class="table table-dark table-bordered table-hover">
+        <thead>    
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">todo_text</th>
+                <th scope="col">time_added</th>
+                <th scope="col">time_finished</th>
+                <th scope="col">boolean finished</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let todo of todos">
+                <th scope="row">{{todo.id}}</th>
+                <th>{{todo.todo_text}}</th>
+                <th>{{todo.time_added}}</th>
+                <th>{{todo.finished}}</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
