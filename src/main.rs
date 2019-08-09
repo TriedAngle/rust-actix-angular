@@ -30,6 +30,7 @@ fn main() {
                 web::resource("/todos/{id}")
                     .route(web::get().to_async(services::todos::get_by_id))
                     .route(web::delete().to_async(services::todos::delete_by_id))
+                    .route(web::put().to_async(services::todos::update_by_id))
             )
         )
         .bind("127.0.0.1:8080").unwrap()

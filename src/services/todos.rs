@@ -31,3 +31,11 @@ pub fn delete_by_id(id: web::Path<i32>) -> Result<HttpResponse, HttpResponse> {
         })
 }
 
+pub fn update_by_id(id: web::Path<i32>, new_todo: web::Json<NewTodo>) -> Result<HttpResponse, HttpResponse> {
+    Todo::update_by_id(&id, &new_todo)
+        .map(|_| HttpResponse::Ok().json(()))
+        .map_err(|e| {
+            HttpResponse::InternalServerError().json(e.to_string())
+        })
+}
+
