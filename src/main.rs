@@ -21,15 +21,18 @@ fn main() {
     let sys = actix::System::new("todo-api");
 
     HttpServer::new(|| App::new().service(
-        web::resource("/todos").route(web::get().to_async(services::todos::all_todos))))
+        web::resource("/todos")
+            .route(web::get().to_async(services::todos::all_todos))
+            .route(web::get().to_async(services::todos::create_todo))
+        ))
             .bind("127.0.0.1:8080").unwrap()
             .start();
     
     let _ = sys.run();
 }
 
-fn get_current_time_rfc3339() -> String {
-    use chrono::prelude::*;
-    let current_time: DateTime<Utc> = Utc::now();
-    String::from(current_time.to_rfc3339())
-}
+// fn get_current_time_rfc3339() -> String {
+//     use chrono::prelude::*;
+//     let current_time: DateTime<Utc> = Utc::now();
+//     String::from(current_time.to_rfc3339())
+// }
