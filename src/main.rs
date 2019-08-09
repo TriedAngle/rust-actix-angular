@@ -28,6 +28,7 @@ fn main() {
         println!("successfully inserted todo");
     } else {
         println!("failed inserting todo")
+        
     }
 }
 
