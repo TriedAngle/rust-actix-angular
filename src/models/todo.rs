@@ -35,9 +35,22 @@ impl Todo {
                 .execute(&connection)?;
         Ok(())
     }
+
+    pub fn update_by_id(id: &i32, new_todo: &NewTodo) -> Result<(), diesel::result::Error> {
+        use diesel::QueryDsl;
+        use diesel::RunQueryDsl;
+        use crate::schema::todos::dsl;
+        use crate::db_handler::connect;
+
+        let connection = connect();
+        diesel::update(dsl::todos.find(id))
+            .set(new_todo)
+            .execute(&connection)?;
+        Ok(())
+    }
 }
 
-#[derive(Insertable, Deserialize)]
+#[derive(Insertable, Deserialize, AsChangeset)]
 #[table_name = "todos"]
 pub struct NewTodo {
     pub todo_text: String,
