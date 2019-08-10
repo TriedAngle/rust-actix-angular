@@ -22,7 +22,7 @@ export class TodoListComponent implements OnInit {
   }
 
   getTodos = () => {
-    this.todo_service.getTodos().subscribe(
+    this.todo_service.getTodos().toPromise().then(
       data => {
         this.todos = data;
       },
@@ -52,6 +52,18 @@ export class TodoListComponent implements OnInit {
       },
       error => {
         console.log(error);
+      }
+    )
+  }
+  
+  todoCreate = () => {
+    this.todo_service.createTodo(this.selected_todo).subscribe(
+      data => {
+        console.log(data)
+        this.todos.push(data);
+      },
+      error => {
+        console.log(error)
       }
     )
   }

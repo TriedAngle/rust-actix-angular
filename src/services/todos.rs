@@ -9,7 +9,7 @@ pub fn get_all(_req: HttpRequest) -> HttpResponse {
 pub fn create(new_todo: web::Json<NewTodo>) -> Result<HttpResponse, HttpResponse> {
     new_todo
         .create()
-        .map(|todo| HttpResponse::Ok().json(todo))
+        .map(|todo| HttpResponse::Created().json(todo))
         .map_err(|e| {
             HttpResponse::InternalServerError().json(e.to_string())
         })

@@ -20,23 +20,22 @@
             </tr>
         </tbody>
     </table>
-    <hr>
-    <h2>Selected Todo</h2>
-    <ul>
-        <li>
-            <input type="text" [(ngModel)]="selected_todo.todo_text">TEXT
-        </li>
-        <li>
-            <input type="text" [(ngModel)]="selected_todo.time_added">ADDED
-        </li>
-        <li>
-            <input type="checkbox" [(ngModel)]="selected_todo.is_finished">FINISHED
-        </li>
-        <li>
-            <input type="text" [(ngModel)]="selected_todo.time_finished">TIME_FINISHED
-        </li>
-        <li>
-            <button (click)="todoUpdate()"> PUT </button>
-        </li>
-    </ul>
 </div>
+<h2>Selected Todo</h2>
+<ul>
+    <li>
+        <input type="text" [(ngModel)]="selected_todo.todo_text">TEXT
+    </li>
+    <li>
+        <input type="text" [(ngModel)]="selected_todo.time_added">ADDED
+    </li>
+    <li>
+        <input type="checkbox" [(ngModel)]="selected_todo.is_finished">FINISHED
+    </li>
+    <li>
+        <input type="text" [(ngModel)]="selected_todo.time_finished">TIME_FINISHED
+    </li>
+    <li>
+        <button (click)="todoUpdate()"> PUT </button> <button (click)="todoCreate()"> POST </button>
+    </li>
+</ul>
