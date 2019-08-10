@@ -36,6 +36,8 @@
         <input type="text" [(ngModel)]="selected_todo.time_finished">TIME_FINISHED
     </li>
     <li>
-        <button (click)="todoUpdate()"> PUT </button> <button (click)="todoCreate()"> POST </button> <button (click)="todoDelete()"> DELETE </button>
+        <button *ngIf="selected_todo.id != -1" (click)="todoUpdate()"> update </button>
+        <button *ngIf="selected_todo.id == -1" (click)="todoCreate()"> create </button>
+        <button *ngIf="selected_todo.id != -1" (click)="todoDelete()"> delete </button>
     </li>
 </ul>
