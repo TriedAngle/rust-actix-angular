@@ -14,7 +14,7 @@ export class TodoListComponent implements OnInit {
   
   constructor(private todo_service: TodoServiceService) {
     this.todo_service = todo_service;
-    this.selected_todo = {id: -1, todo_text: '', is_finished: false, time_added: '', time_finished: ''};
+    this.setSelectedEmpty();
    }
 
   ngOnInit() {
@@ -72,12 +72,14 @@ export class TodoListComponent implements OnInit {
     this.todo_service.deleteTodo(this.selected_todo.id).subscribe(
       data => {
         this.getTodos();
-        this.selected_todo = {id: -1, todo_text: '', is_finished: false, time_added: '', time_finished: ''};
+        this.setSelectedEmpty();
       },
       error => {
         console.log(error);
       }
     )
   }
+
+  setSelectedEmpty = () => this.selected_todo = {id: -1, todo_text: '', is_finished: false, time_added: '', time_finished: ''};
 
 }
