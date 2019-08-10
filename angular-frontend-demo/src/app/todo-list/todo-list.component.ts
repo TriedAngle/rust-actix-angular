@@ -72,6 +72,7 @@ export class TodoListComponent implements OnInit {
     this.todo_service.deleteTodo(this.selected_todo.id).subscribe(
       data => {
         this.getTodos();
+        this.selected_todo = {id: -1, todo_text: '', is_finished: false, time_added: '', time_finished: ''};
       },
       error => {
         console.log(error);
