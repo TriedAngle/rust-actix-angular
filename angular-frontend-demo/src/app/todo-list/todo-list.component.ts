@@ -49,6 +49,7 @@ export class TodoListComponent implements OnInit {
     this.todo_service.updateTodo(this.selected_todo).subscribe(
       data => {
         this.selected_todo = data;
+        this.getTodos();
       },
       error => {
         console.log(error);
