@@ -35,4 +35,3 @@ pub fn update_by_id(id: web::Path<i32>, new_todo: web::Json<NewTodo>) -> Result<
     Todo::update_by_id(&id, &new_todo).unwrap();
     get_by_id(id)
 }
-

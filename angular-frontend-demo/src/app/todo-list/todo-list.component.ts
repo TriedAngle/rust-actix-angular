@@ -59,11 +59,21 @@ export class TodoListComponent implements OnInit {
   todoCreate = () => {
     this.todo_service.createTodo(this.selected_todo).subscribe(
       data => {
-        console.log(data)
         this.todos.push(data);
       },
       error => {
-        console.log(error)
+        console.log(error);
+      }
+    )
+  }
+
+  todoDelete = () => {
+    this.todo_service.deleteTodo(this.selected_todo.id).subscribe(
+      data => {
+        this.getTodos();
+      },
+      error => {
+        console.log(error);
       }
     )
   }

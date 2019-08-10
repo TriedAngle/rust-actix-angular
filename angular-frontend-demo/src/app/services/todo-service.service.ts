@@ -31,4 +31,8 @@ export class TodoServiceService {
     const body = {id: todo.id, todo_text: todo.todo_text, time_added: todo.time_added, time_finished: todo.time_finished, is_finished: todo.is_finished};
     return this.http.post(this.url, body, {headers: this.http_headers});
   }
+
+  deleteTodo(id: number): Observable<any> {
+    return this.http.delete(this.url + '/' + id, {headers: this.http_headers});
+  }
 }
