@@ -21,4 +21,9 @@ export class TodoServiceService {
   getTodoById(id: number): Observable<Todo>{
     return this.http.get<Todo>(this.url + '/' + id, {headers: this.http_headers})
   }
+
+  updateTodo(todo: Todo): Observable<any> {
+    const body = {id: todo.id, todo_text: todo.todo_text, time_added: todo.time_added, time_finished: todo.time_finished, is_finished: todo.is_finished}
+    return this.http.put(this.url + '/' + todo.id, body, {observe: 'response', headers: this.http_headers});
+  }
 }

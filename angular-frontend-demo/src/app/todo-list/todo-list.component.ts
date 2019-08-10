@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoServiceService } from '../services/todo-service.service';
+import { Todo } from './todo.model';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,14 +9,12 @@ import { TodoServiceService } from '../services/todo-service.service';
 })
 export class TodoListComponent implements OnInit {
 
-  public todos = [];
-  public curr_text: string;
-  public curr_added: string;
-  public curr_finished: string;
-  public curr_time_finished: string;
+  public todos = Array<Todo>();
+  public selected_todo: Todo;
   
   constructor(private todo_service: TodoServiceService) {
     this.todo_service = todo_service;
+    this.selected_todo = {id: -1, todo_text: '', is_finished: false, time_added: '', time_finished: ''};
    }
 
   ngOnInit() {
@@ -25,23 +24,31 @@ export class TodoListComponent implements OnInit {
   getTodos = () => {
     this.todo_service.getTodos().subscribe(
       data => {
-      this.todos = data;
+        this.todos = data;
       },
       error => {
         console.log(error);
       })
   }
 
-  todo_clicked = (todo) => {
+  todoClicked = (todo: Todo) => {
     this.todo_service.getTodoById(todo.id).subscribe(
       data => {
-        console.log(todo)
-        this.curr_text = todo.todo_text;
-        this.curr_added = todo.time_added;
-        this.curr_finished = todo.is_finished;
-        if(todo.time_finished === ""){
-          this.curr_time_finished = "Not finished yet!"
+        this.selected_todo = data;
+        if(this.selected_todo.time_finished === ""){
+          this.selected_todo.time_finished= "Not finished yet!"
         }
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  todoUpdate = () => {
+    this.todo_service.updateTodo(this.selected_todo).subscribe(
+      data => {
+        this.selected_todo = data;
       },
       error => {
         console.log(error);

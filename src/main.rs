@@ -29,7 +29,7 @@ fn main() {
                     .allowed_methods(vec!["GET", "POST", "PUT", "DELETE"])
                     .allowed_headers(vec![http::header::AUTHORIZATION, http::header::ACCEPT])
                     .allowed_header(http::header::CONTENT_TYPE)
-                    .max_age(3600))   
+                    .max_age(3600))
             .service(
                 web::resource("/todos")
                     .route(web::get().to_async(services::todos::get_all))

@@ -1,8 +1,8 @@
 <h1 class="header">todo-list</h1>
 <div class="container-fluid">
-    <table class="table table-dark table-bordered table-hover">
-        <thead>    
-            <tr>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">    
+            <tr >
                 <th scope="col">id</th>
                 <th scope="col">todo_text</th>
                 <th scope="col">time_added</th>
@@ -11,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let todo of todos" (click)="todo_clicked(todo)">
+            <tr *ngFor="let todo of todos" (click)="todoClicked(todo)">
                 <th scope="row">{{todo.id}}</th>
                 <th>{{todo.todo_text}}</th>
                 <th>{{todo.time_added}}</th>
@@ -24,16 +24,19 @@
     <h2>Selected Todo</h2>
     <ul>
         <li>
-            <input type="text" [(ngModel)]="curr_text">TEXT
+            <input type="text" [(ngModel)]="selected_todo.todo_text">TEXT
         </li>
         <li>
-            <input type="text" [(ngModel)]="curr_added">ADDED
+            <input type="text" [(ngModel)]="selected_todo.time_added">ADDED
         </li>
         <li>
-            <input type="checkbox" [(ngModel)]="curr_finished">FINISHED
+            <input type="checkbox" [(ngModel)]="selected_todo.is_finished">FINISHED
         </li>
         <li>
-            <input type="text" [(ngModel)]="curr_time_finished">TIME_FINISHED
+            <input type="text" [(ngModel)]="selected_todo.time_finished">TIME_FINISHED
+        </li>
+        <li>
+            <button (click)="todoUpdate()"> PUT </button>
         </li>
     </ul>
 </div>
