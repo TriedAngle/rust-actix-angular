@@ -63,7 +63,6 @@ impl NewTodo {
     pub fn create(&self) -> Result<Todo, diesel::result::Error> {
         use diesel::RunQueryDsl;
         use crate::db_handler::connect;
-
         let connection = connect();
         diesel::insert_into(todos::table)
             .values(self)

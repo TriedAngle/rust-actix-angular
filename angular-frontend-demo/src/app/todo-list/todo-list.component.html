@@ -11,7 +11,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let todo of todos" (click)="todoClicked(todo)">
+            <!-- <tr *ngFor="let todo of todos" (click)="todoClicked(todo)">
+                <th scope="row">{{todo.id}}</th>
+                <th>{{todo.todo_text}}</th>
+                <th>{{todo.time_added}}</th>
+                <th>{{todo.time_finished}}</th>
+                <th>{{todo.finished}}</th>
+            </tr> -->
+            <tr *ngFor="let todo of todos_async | async" (click)="todoClicked(todo)">
                 <th scope="row">{{todo.id}}</th>
                 <th>{{todo.todo_text}}</th>
                 <th>{{todo.time_added}}</th>
@@ -26,9 +33,9 @@
     <li>
         <input type="text" [(ngModel)]="selected_todo.todo_text">TEXT
     </li>
-    <li>
+    <!-- <li>
         <input type="text" [(ngModel)]="selected_todo.time_added">ADDED
-    </li>
+    </li> -->
     <li>
         <input type="checkbox" [(ngModel)]="selected_todo.is_finished">FINISHED
     </li>

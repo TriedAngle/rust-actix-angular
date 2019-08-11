@@ -1,5 +1,5 @@
 [package]
-name = "rust-restful-actix"
+name = "rust-actix-angular"
 version = "0.1.0"
 authors = ["Sebastian Strobl <Sebastian@Strobl.net>"]
 edition = "2018"

@@ -6,7 +6,10 @@ pub fn get_all(_req: HttpRequest) -> HttpResponse {
     HttpResponse::Ok().json(TodoList::get_all())
 }
 
-pub fn create(new_todo: web::Json<NewTodo>) -> Result<HttpResponse, HttpResponse> {
+pub fn create(mut new_todo: web::Json<NewTodo>) -> Result<HttpResponse, HttpResponse> {
+    let chrono_current_time: chrono::NaiveDateTime = chrono::Local::now().naive_local();
+    let current_time: String = chrono_current_time.to_string();
+    new_todo.time_added = current_time;
     new_todo
         .create()
         .map(|todo| HttpResponse::Created().json(todo))
